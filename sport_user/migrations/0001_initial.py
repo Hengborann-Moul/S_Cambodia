@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('description', models.CharField(max_length=1000)),
-                ('event_name', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sport.Event')),
+                ('event_name', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sport_user.Event')),
             ],
         ),
         migrations.CreateModel(
@@ -54,11 +54,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pastevent',
             name='playground',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sport.Playground'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sport_user.Playground'),
         ),
         migrations.AddField(
             model_name='event',
             name='playground',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sport.Playground'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sport_user.Playground'),
         ),
     ]

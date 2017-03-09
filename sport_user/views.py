@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.contrib.auth import login as auth_login
 
 # Create your views here.
-from sport.form import UserForm, PlaygroundForm
-from sport.models import Playground
+from sport_user.form import UserForm, PlaygroundForm
+from sport_user.models import Playground
 
 
 def index(request):
@@ -21,12 +21,12 @@ def register(request):
         user.set_password(password)
         user.save()
         user = authenticate(username=username, password=password)
-        return render(request, 'login.html')
+        return render(request, 'sport_user/login.html')
 
     context = {
         "form": form,
     }
-    return render(request, 'register.html', context)
+    return render(request, 'sport_user/register.html', context)
 
 
 def user_login(request):
@@ -40,12 +40,12 @@ def user_login(request):
                 auth_login(request, user)
                 playground = Playground.objects.filter(user=request.user)
 
-                return render(request, 'create_playground.html', {'playground': playground})
+                return render(request, 'sport_user/create_playground.html', {'playground': playground})
             else:
-                return render(request, 'login.html', {'error_message': 'Your account has been disabled'})
+                return render(request, 'sport_user/login.html', {'error_message': 'Your account has been disabled'})
         else:
-            return render(request, 'login.html', {'error_message': 'Indvaile'})
-    return render(request, 'login.html')
+            return render(request, 'sport_user/login.html', {'error_message': 'Indvaile'})
+    return render(request, 'sport_user/login.html')
 
 
 def playground(request):
@@ -62,7 +62,7 @@ def playground(request):
         commit = {
             'form': form
         }
-    return render(request, 'playground.html')
+    return render(request, 'sport_user/playground.html')
 
 
 def user_logout(request):
@@ -71,4 +71,4 @@ def user_logout(request):
     context = {
         'form': form
     }
-    return render(request, 'login.html', context)
+    return render(request, 'sport_user/login.html', context)
