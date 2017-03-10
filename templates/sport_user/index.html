@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="uk-navbar-container tm-navbar-container uk-sticky uk-sticky-fixed">
+        <div class="uk-container uk-container-expand">
+            <nav class="uk-navbar">
+                <div class="uk-navbar-left">
+                    <a href="" class="uk-navbar-item uk-logo">
+                        UI KIT
+                    </a>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav uk-visible@m">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Documentation</a></li>
+                        <li><a href="">Legendary</a></li>
+                        <li><a href="" uk-toggle="target: #modal-close">Login/Sign up</a></li>
+                    </ul>
+                    <a uk-navbar-toggle-icon href="#offcanvas" uk-toggle
+                       class="uk-navbar-toggle uk-hidden@m uk-navbar-toggle-icon uk-icon"></a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div id="offcanvas" uk-offcanvas class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">
+            <div class="uk-panel">
+                <ul class="uk-nav uk-nav-default tm-nav">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Documentation</a></li>
+                    <li><a href="">Legendary</a></li>
+                    <li><a href="">Login/Signup</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block model_login %}
+    <!-- This is the modal with the default close button -->
+    <div id="modal-close" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <ul uk-tab="" class="uk-tab">
+                <li aria-expanded="true" class="uk-active"><a href="#">Login</a></li>
+                <li aria-expanded="false" class=""><a href="#">Sign up</a></li>
+            </ul>
+            <ul class="uk-switcher uk-margin">
+                <li class="">
+                    <form action="{% url 'user_login'  %}"  method="post">
+                        {% csrf_token %}
+                        <fieldset class="uk-fieldset">
+
+                            <div class="uk-margin">
+                                <input class="uk-input" name="username" type="text" value="" >
+                            </div>
+                            <div class="uk-margin">
+                                <input class="uk-input" name="password" type="password" value="">
+                            </div>
+
+                            <p class="uk-align-right">
+                                <button class="uk-button uk-button-primary" type="submit">Login</button>
+                            </p>
+                        </fieldset>
+                    </form>
+                </li>
+                <li class="">
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <fieldset class="uk-fieldset">
+                            <div class="uk-margin">
+                                <input class="uk-input" name="first_name" type="text" placeholder="Firstname">
+                            </div>
+                            <div class="uk-margin">
+                                <input class="uk-input" name="last_name" type="text" placeholder="Lastname">
+                            </div>
+                            <div class="uk-margin">
+                                <input class="uk-input" name="username" type="text" placeholder="Username">
+                            </div>
+                            <div class="uk-margin">
+                                <input class="uk-input" name="password" type="password" placeholder="password">
+                            </div>
+                            <div class="uk-margin">
+                                <input class="uk-input" name="email" type="text" placeholder="email">
+                            </div>
+                            <div class="uk-margin">
+                                <button class="uk-button uk-button-primary uk-align-right" type="submit">Login</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

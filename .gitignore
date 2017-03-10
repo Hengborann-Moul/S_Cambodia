@@ -2,3 +2,4 @@
 S_Cambodia/settings.py
 db.sqlite3
 *.pyc
+readme.txt

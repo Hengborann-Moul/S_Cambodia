@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, logout
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login
+from django.utils.datastructures import MultiValueDictKeyError
 
 # Create your views here.
 from sport_user.form import UserForm, PlaygroundForm
@@ -9,7 +10,7 @@ from sport_user.models import Playground
 
 
 def index(request):
-    return HttpResponse("<h1> Welcome to Sport Cambodia</h1>")
+    return render(request, 'sport_user/index.html')
 
 
 def register(request):
@@ -31,8 +32,14 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        try:
+
+            username = request.POST['username']
+
+            password = request.POST['password']
+        except MultiValueDictKeyError:
+            username = False
+            password = False
 
         user = authenticate(username=username, password=password)
         if user is not None:
